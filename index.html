@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Coming Soon</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #aaa;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 60px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            width: 500px; /* Maximum width for larger screens */
+        }
+        h1 {
+            font-size: 40px;
+            font-weight: 900;
+        }
+        p {
+            font-size: 25px;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px; /* Smaller heading on smaller screens */
+            }
+            p {
+                font-size: 20px; /* Smaller paragraph on smaller screens */
+            }
+            .container {
+                padding: 30px; /* Reduce padding on smaller screens */
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 30px; /* Even smaller heading on very small screens */
+            }
+            p {
+                font-size: 18px; /* Smaller text on small screens */
+            }
+            .container {
+                padding: 20px; /* Adjust padding further for very small screens */
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>coming soon</p>
+    <div class="container">
+        <h1>COMING SOON...</h1>
+        <p>Milan Milk will be there soon!</p>
+    </div>
 </body>
 </html>
+
