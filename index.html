@@ -3,63 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+    <title>milanmilk - Coming Soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --dark-purple: #10002b;
+            --mid-purple: #240046;
+            --main-purple: #5a189a;
+            --glow-color: #e0aaff;
+            --text-color: #f2e9f4;
+            --subtitle-color: #d7c9de;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Poppins', sans-serif; color: var(--text-color); overflow: hidden; }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #aaa;
-            margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--dark-purple), var(--mid-purple), var(--main-purple));
+            background-size: 400% 400%;
+            animation: pan-background 15s ease infinite;
+            perspective: 1000px;
         }
-        .container {
-            background: white;
-            padding: 60px;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            width: 500px; /* Maximum width for larger screens */
+
+        @keyframes pan-background {
+            0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; }
         }
-        h1 {
-            font-size: 40px;
-            font-weight: 900;
+
+        .coming-soon-box {
+            position: relative; width: 100%; max-width: 800px; padding: 3rem;
+            background: rgba(22, 5, 46, 0.7); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); border-radius: 20px;
+            text-align: center; overflow: hidden; z-index: 2;
+            border: 1px solid rgba(224, 170, 255, 0.1); transition: transform 0.1s ease-out;
         }
-        p {
-            font-size: 25px;
-            color: #555;
+
+        .coming-soon-box::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 150px;
+            background: linear-gradient(180deg, rgba(224, 170, 255, 0.25), transparent);
+            animation: pulse-light 4s ease-in-out infinite;
         }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 40px; /* Smaller heading on smaller screens */
-            }
-            p {
-                font-size: 20px; /* Smaller paragraph on smaller screens */
-            }
-            .container {
-                padding: 30px; /* Reduce padding on smaller screens */
-            }
+
+        @keyframes pulse-light {
+            0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; }
         }
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 30px; /* Even smaller heading on very small screens */
-            }
-            p {
-                font-size: 18px; /* Smaller text on small screens */
-            }
-            .container {
-                padding: 20px; /* Adjust padding further for very small screens */
-            }
+
+        .logo-container { margin-bottom: 2rem; }
+        .logo {
+            max-width: 280px; width: 70%;
+            filter: drop-shadow(0 0 15px var(--glow-color));
+            animation: float-logo 6s ease-in-out infinite;
+        }
+        @keyframes float-logo {
+            0%   { transform: translateY(0px) rotate(-1deg); }
+            50%  { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(-1deg); }
+        }
+
+        .title {
+            font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            line-height: 1.1; animation: pulse-glow 3s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 15px rgba(224, 170, 255, 0.7); }
+            50% { text-shadow: 0 0 25px rgba(224, 170, 255, 1); }
+            100% { text-shadow: 0 0 15px rgba(224, 170, 255, 0.7); }
+        }
+
+        .subtitle {
+            margin-top: 1rem; font-size: clamp(1rem, 3vw, 1.25rem);
+            font-weight: 400; color: var(--subtitle-color); letter-spacing: 0.05em;
+        }
+
+        #floating-elements-container { /* Renamed for clarity */
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute; bottom: -150px; background: rgba(199, 125, 255, 0.15);
+            border-radius: 50%; animation: float-up 20s linear infinite;
+        }
+
+        @keyframes float-up {
+            from { transform: translateY(0) translateX(var(--sway)); }
+            to { transform: translateY(-110vh) translateX(var(--sway)); }
+        }
+
+        /* --- NEW: Minecraft Item Styles --- */
+        .mc-item {
+            position: absolute;
+            bottom: -150px;
+            /* Recolor items to fit the theme */
+            filter: brightness(0.8) saturate(0) sepia(1) hue-rotate(220deg) saturate(2) drop-shadow(0 0 10px var(--glow-color));
+            opacity: 0;
+            /* Items have two separate animations! */
+            animation: float-up var(--float-duration) linear, 
+                       tumble var(--tumble-duration) linear infinite;
+        }
+
+        /* Tumbling/Rotating animation */
+        @keyframes tumble {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 600px) {
+            .coming-soon-box { padding: 3rem 1.5rem; border-radius: 15px; }
+            .logo { max-width: 200px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>COMING SOON...</h1>
-        <p>Milan Milk will be there soon! its still under construction</p>
+
+    <div id="floating-elements-container"></div>
+
+    <div class="coming-soon-box">
+        <div class="logo-container">
+            <img src="logo.png" alt="milanmilk Logo" class="logo">
+        </div>
+        <h1 class="title">Coming Soon</h1>
+        <p class="subtitle">milanmilk minecraft server is still cooking...</p>
     </div>
+
+    <script>
+        const container = document.getElementById('floating-elements-container');
+
+        // --- Bubble generation ---
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            const size = Math.random() * 40 + 10; // Bubbles are slightly smaller now
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${Math.random() * 100}%`;
+            const duration = Math.random() * 10 + 15; // 15 to 25 seconds
+            bubble.style.animationDuration = `${duration}s`;
+            const sway = (Math.random() - 0.5) * 100;
+            bubble.style.setProperty('--sway', `${sway}px`);
+            container.appendChild(bubble);
+            setTimeout(() => { bubble.remove(); }, duration * 1000);
+        }
+        setInterval(createBubble, 200);
+
+        // --- NEW: Minecraft Item generation ---
+        const minecraftItemUrls = [
+            'https://i.imgur.com/JpH3L4v.png', // Milk Bucket
+            'https://i.imgur.com/vHqB01J.png', // Diamond
+            'https://i.imgur.com/wP0Cjct.png', // Ender Pearl
+            'https://i.imgur.com/39GaA3H.png'  // Amethyst Shard
+        ];
+
+        function createMinecraftItem() {
+            const item = document.createElement('img');
+            item.classList.add('mc-item');
+            item.src = minecraftItemUrls[Math.floor(Math.random() * minecraftItemUrls.length)];
+            const size = Math.random() * 50 + 40; // Items are a bit larger
+            item.style.width = `${size}px`;
+            item.style.left = `${Math.random() * 100}%`;
+            
+            // Randomize durations for variety
+            const floatDuration = Math.random() * 15 + 20; // 20-35s to float up
+            const tumbleDuration = Math.random() * 10 + 5; // 5-15s to do a full spin
+
+            // Assign CSS variables for the animations
+            item.style.setProperty('--float-duration', `${floatDuration}s`);
+            item.style.setProperty('--tumble-duration', `${tumbleDuration}s`);
+
+            // Appear at a random point in their animation
+            item.style.animationDelay = `-${Math.random() * floatDuration}s`;
+            
+            container.appendChild(item);
+            setTimeout(() => { item.remove(); }, floatDuration * 1000);
+        }
+        setInterval(createMinecraftItem, 800); // Create an item every 0.8 seconds
+
+        // --- 3D Tilt Effect Script ---
+        const box = document.querySelector('.coming-soon-box');
+        const body = document.querySelector('body');
+        body.addEventListener('mousemove', (e) => {
+            const rotY = -((e.clientX - window.innerWidth / 2) / window.innerWidth) * 10;
+            const rotX = ((e.clientY - window.innerHeight / 2) / window.innerHeight) * 10;
+            box.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+        });
+        body.addEventListener('mouseleave', () => {
+            box.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
 </body>
 </html>
-
